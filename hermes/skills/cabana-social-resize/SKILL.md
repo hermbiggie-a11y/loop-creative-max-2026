@@ -1,7 +1,7 @@
 ---
 name: cabana-social-resize
 description: "Loop Creative beat 2b: build the Cabana social sizes live in Photoshop from the approved headline and export PNGs (also the 30-second 'Instagram Story' request)."
-version: 1.1.0
+version: 1.2.0
 author: Loop Creative
 platforms: [windows]
 metadata:
