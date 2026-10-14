@@ -20,7 +20,7 @@ $deny = $R::WriteData -bor $R::AppendData -bor $R::WriteExtendedAttributes -bor 
 
 foreach ($p in $dirs + $files) {
     if (-not (Test-Path $p)) { Write-Warning "missing $p"; continue }
-    $isDir = (Get-Item $p).PSIsContainer
+    $isDir = (Get-Item -Force $p).PSIsContainer   # -Force: .git is hidden
     $acl = Get-Acl $p
     $rights = if ($isDir) { $deny -bor $R::DeleteSubdirectoriesAndFiles } else { $deny }
     $inherit = if ($isDir) { 'ContainerInherit, ObjectInherit' } else { 'None' }
