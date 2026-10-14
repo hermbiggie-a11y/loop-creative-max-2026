@@ -2,15 +2,17 @@
 #   powershell -ExecutionPolicy Bypass -File "C:\Users\Dell Demo\Desktop\Demo\Loop Agency\tools\lock-masters.ps1"           # lock
 #   powershell -ExecutionPolicy Bypass -File "C:\Users\Dell Demo\Desktop\Demo\Loop Agency\tools\lock-masters.ps1" -Unlock   # to edit masters
 # Locked: cabana\_master, cabana\raw, cabana\assets, brand.md, prompts.txt, AGENTS.md, tools\ (scripts), docs\, hermes\ (snapshot)
-#         and %USERPROFILE%\.hermes\skills\loop (the live Cabana skills)
+#         .git (history), README/.gitignore/launch .cmd files, and %USERPROFILE%\.hermes\skills\loop (live Cabana skills)
+# Workflow to change anything: -Unlock -> edit -> copy skills to hermes\skills -> git commit -> lock again.
 # Writable: cabana\work, cabana\social, cabana\cut (what Hermes produces; wiped by the reset).
 # (This script lives in tools\ but stays runnable when locked: reading is never denied.)
 param([switch]$Unlock)
 $Loop = Split-Path $PSScriptRoot -Parent
 $me = New-Object Security.Principal.NTAccount("$env:USERDOMAIN\$env:USERNAME")
-$dirs  = @('cabana\_master', 'cabana\raw', 'cabana\assets', 'tools', 'docs', 'hermes' | ForEach-Object { Join-Path $Loop $_ }) +
+$dirs  = @('cabana\_master', 'cabana\raw', 'cabana\assets', 'tools', 'docs', 'hermes', '.git' | ForEach-Object { Join-Path $Loop $_ }) +
          (Join-Path $env:USERPROFILE '.hermes\skills\loop')   # live Cabana skills: Hermes reads them, can't edit them
-$files = 'cabana\brand.md', 'cabana\prompts.txt', 'cabana\AGENTS.md' | ForEach-Object { Join-Path $Loop $_ }
+$files = 'cabana\brand.md', 'cabana\prompts.txt', 'cabana\AGENTS.md', 'README.md', '.gitignore',
+         'Start Loop Demo.cmd', 'Reset Cabana.cmd', 'Reload Adobe Plugins.cmd' | ForEach-Object { Join-Path $Loop $_ }
 
 # Exact write rights only. Generic "W" (icacls) also carries SYNCHRONIZE, which would block reading.
 $R = [Security.AccessControl.FileSystemRights]
