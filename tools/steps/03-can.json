@@ -1,0 +1,5 @@
+[
+  {"action": "createDocument", "options": {"name": "cabana-can", "width": 1200, "height": 1800, "resolution": 72, "fillColor": {"red": 255, "green": 255, "blue": 255}, "colorMode": "RGB"}},
+  {"action": "generateImage", "timeout": 300, "options": {"layerName": "can", "contentType": "photo",
+    "prompt": "Studio product photo of one single tall slim 12 oz aluminum beverage can standing upright, centered, front view, glossy coral orange can body with thin white and teal horizontal cabana stripes and the bold word CABANA printed vertically, cold condensation droplets, soft studio lighting, plain pure white seamless background, the whole can fully visible with space around it"}}
+]

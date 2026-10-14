@@ -1,0 +1,38 @@
+LOOP CREATIVE — exact messages for each beat (send from your phone in Telegram)
+If Hermes goes off-script: send /stop, then resend the line below.
+
+=== RESET (before every run) =========================================
+Double-click "Reset Cabana.cmd" on the laptop, then in Telegram:  /new
+
+=== 30-SECOND VERSION ================================================
+Resize the Cabana hero for Instagram Story and send it to me.
+
+=== BEAT 1 — Brief in, brief out (voice note or text) =================
+New client: Cabana Cold Brew, a canned cold brew launching in Miami on June 1st. We need one hero key visual, six social sizes, a 30-second spot cut from our raw footage, and captions. Write the brief.
+  -> Gate. Reply:
+B, and make the headline shorter.
+
+=== BEAT 2 — Hero + six social sizes (Photoshop) =====================
+Open the Cabana hero, extend the beach with Generative Fill, put our headline on it, and send me three headline options.
+  -> Gate. Reply with the number, e.g.:
+2
+  -> Hermes builds the six sizes. (Stopwatch starts here.)
+
+=== BEAT 3 — Rough cut, captions, preview (Premiere) =================
+Cut the 30-second spot from the raw footage in shot-list order and send me frames at 0, 10, 20 and 29 seconds.
+  -> Gate. Reply with editor notes:
+Open on the pour, drop the beach shot, shorter dissolves.
+  -> New frames arrive. Reply:
+go
+
+=== BEAT 4 — Pull the cable (offline) ================================
+(unplug ethernet)
+/model
+  -> pick the local Qwen3.8 27B (or let the fallback switch on its own)
+Make a Spanish version of the square post for the Little Havana launch and send it to me.
+What did you learn today?
+Every morning at 8, send me the project status.
+
+=== FALLBACK LINES ===================================================
+Photoshop panel dropped:  Reload the Adobe plugins and try again.
+Firefly down:             Skip the fill — use the pre-extended hero and carry on.

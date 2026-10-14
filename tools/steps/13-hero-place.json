@@ -1,0 +1,5 @@
+[
+  {"action": "placeImage", "timeout": 120, "options": {"layerId": 3, "imagePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/bg-beach.jpg"}},
+  {"action": "placeImage", "timeout": 120, "options": {"layerId": 4, "imagePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/can-cutout.png"}},
+  {"action": "placeImage", "timeout": 120, "options": {"layerId": 5, "imagePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo-light.png"}}
+]

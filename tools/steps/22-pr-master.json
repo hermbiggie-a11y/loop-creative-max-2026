@@ -1,0 +1,11 @@
+[
+    {
+        "app":  "premiere",
+        "timeout":  60,
+        "options":  {
+                        "name":  "cabana",
+                        "path":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/_master"
+                    },
+        "action":  "createProject"
+    }
+]

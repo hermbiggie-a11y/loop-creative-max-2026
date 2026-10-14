@@ -1,0 +1,4 @@
+[
+  {"action": "scaleLayer", "options": {"layerId": 10, "width": 84, "height": 84, "anchorPosition": "MIDDLECENTER", "interpolationMethod": "AUTOMATIC"}},
+  {"action": "getLayerBounds", "options": {"layerId": 10}}
+]

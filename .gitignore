@@ -1,0 +1,29 @@
+# generated per run (wiped by Reset Cabana.cmd)
+cabana/work/
+cabana/social/
+cabana/cut/
+Golden/
+
+# third-party / downloaded / rebuildable
+tools/_downloads/
+tools/Faster-Whisper-XXL/
+tools/_xxl_data/
+tools/faster-whisper-xxl.exe
+tools/ffmpeg.exe
+tools/One Click Transcribe.bat
+tools/adb-proxy/
+tools/adb-mcp/
+tools/.venv/
+tools/uxp-load/node_modules/
+tools/steps/_*.json
+__pycache__/
+*.pyc
+
+# Premiere side files
+*.prin
+Adobe Premiere Pro Auto-Save/
+
+# secrets never live here (they're in %USERPROFILE%\.hermes\.env) - belt and braces
+.env
+*.env
+tools/license.txt

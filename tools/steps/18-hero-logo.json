@@ -1,0 +1,4 @@
+[
+  {"action": "deleteLayer", "options": {"layerId": 8}},
+  {"action": "createPixelLayer", "options": {"layerName": "logo", "opacity": 100, "fillNeutral": false, "blendMode": "NORMAL"}}
+]

@@ -1,0 +1,3 @@
+[
+  {"app": "premiere", "action": "exportSequence", "timeout": 180, "options": {"sequenceId": "e88a7376-4180-40be-9d4d-d994a98bcaf1", "outputPath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/work/export-test.mp4", "presetPath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/_master/cabana-1080p.epr"}}
+]

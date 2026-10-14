@@ -1,0 +1,5 @@
+[
+  {"action": "translateLayer", "options": {"layerId": 3, "xOffset": -17, "yOffset": 40}},
+  {"action": "translateLayer", "options": {"layerId": 4, "xOffset": -36, "yOffset": 30}},
+  {"action": "createPixelLayer", "options": {"layerName": "awning", "opacity": 100, "fillNeutral": false, "blendMode": "NORMAL"}}
+]

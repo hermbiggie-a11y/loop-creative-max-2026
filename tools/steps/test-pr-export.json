@@ -1,0 +1,4 @@
+[
+  {"app": "premiere", "action": "importMedia", "options": {"filePaths": ["C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/work/test-clip.mp4"]}},
+  {"app": "premiere", "action": "createSequenceFromMedia", "options": {"itemNames": ["test-clip.mp4"], "sequenceName": "export-test"}}
+]

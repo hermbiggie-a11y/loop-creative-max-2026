@@ -1,0 +1,5 @@
+[
+  {"action": "createDocument", "options": {"name": "cabana-logo", "width": 1200, "height": 520, "resolution": 72, "fillColor": {"red": 246, "green": 231, "blue": 203}, "colorMode": "RGB"}},
+  {"action": "createSingleLineTextLayer", "options": {"layerName": "wordmark", "contents": "CABANA", "fontSize": 260, "opacity": 100, "position": {"x": 300, "y": 360}, "fontName": "BebasNeue-Regular", "textColor": {"red": 59, "green": 36, "blue": 24}, "blendMode": "NORMAL"}},
+  {"action": "createSingleLineTextLayer", "options": {"layerName": "cold brew", "contents": "C O L D   B R E W", "fontSize": 54, "opacity": 100, "position": {"x": 400, "y": 450}, "fontName": "Montserrat-SemiBold", "textColor": {"red": 255, "green": 111, "blue": 89}, "blendMode": "NORMAL"}}
+]

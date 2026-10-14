@@ -1,0 +1,4 @@
+[
+  {"action": "placeImage", "timeout": 120, "options": {"layerId": 9, "imagePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo.png"}},
+  {"action": "getLayers", "options": {}}
+]

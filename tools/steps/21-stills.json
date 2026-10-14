@@ -1,0 +1,281 @@
+[
+    {
+        "options":  {
+                        "name":  "clip01-pour",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Close-up of iced cold brew coffee being poured from a coral orange aluminum can into a tall glass full of ice cubes, dark coffee swirling, condensation, bright Miami daylight, shallow depth of field, commercial beverage photography, no text, no logos",
+                        "layerName":  "clip01-pour"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip01-pour.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip02-ice",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Extreme macro of clear ice cubes dropping into a glass of dark iced coffee with splash and bubbles, bright backlight, summer, commercial beverage photography, no text, no logos",
+                        "layerName":  "clip02-ice"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip02-ice.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip03-beach",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Wide shot of Miami Beach in the morning, turquoise water, white sand, pastel art deco lifeguard tower, palm trees, clear blue sky, no people, cinematic, no text, no logos",
+                        "layerName":  "clip03-beach"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip03-beach.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip04-can-sand",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Close-up of a coral orange aluminum beverage can with teal stripes standing in white beach sand with cold condensation droplets, ocean softly blurred behind, bright sun, commercial product photography, no text, no logos",
+                        "layerName":  "clip04-can-sand"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip04-can-sand.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip05-cooler",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "A hand reaching into a teal beach cooler full of ice and grabbing a coral orange aluminum can, bright summer sun, Miami beach, commercial photography, no text, no logos",
+                        "layerName":  "clip05-cooler"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip05-cooler.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip06-waves",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Gentle turquoise ocean waves washing onto white sand, sparkling sunlight, slow and calm, Miami, cinematic, no text, no logos",
+                        "layerName":  "clip06-waves"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip06-waves.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip07-ocean-drive",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Ocean Drive Miami art deco hotels in pastel pink, mint and yellow with palm trees, bright morning light, no text, cinematic, no text, no logos",
+                        "layerName":  "clip07-ocean-drive"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip07-ocean-drive.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip08-cheers",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Two hands clinking coral orange aluminum cans together on a sunny Miami beach, ocean behind, bright and happy summer mood, commercial photography, no text, no logos",
+                        "layerName":  "clip08-cheers"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip08-cheers.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "name":  "clip09-sunset",
+                        "width":  1920,
+                        "resolution":  72,
+                        "colorMode":  "RGB",
+                        "fillColor":  {
+                                          "blue":  0,
+                                          "red":  0,
+                                          "green":  0
+                                      },
+                        "height":  1080
+                    },
+        "action":  "createDocument"
+    },
+    {
+        "timeout":  300,
+        "options":  {
+                        "contentType":  "photo",
+                        "prompt":  "Golden hour sunset over Miami Beach with palm tree silhouettes, warm coral and gold sky reflecting on the water, cinematic, no text, no logos",
+                        "layerName":  "clip09-sunset"
+                    },
+        "action":  "generateImage"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/stills/clip09-sunset.jpg",
+                        "fileType":  "JPG"
+                    },
+        "action":  "saveDocumentAs"
+    }
+]

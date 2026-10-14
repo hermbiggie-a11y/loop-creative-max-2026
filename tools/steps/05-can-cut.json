@@ -1,0 +1,6 @@
+[
+  {"action": "removeBackground", "timeout": 120, "options": {"layerId": 3}},
+  {"action": "setLayerVisibility", "options": {"layerId": 2, "visible": false}},
+  {"action": "exportLayersAsPng", "timeout": 120, "options": {"layersInfo": [{"layerId": 3, "filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/can-cutout.png"}]}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/can.psd", "fileType": "PSD"}}
+]

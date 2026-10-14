@@ -1,0 +1,5 @@
+[
+  {"action": "getLayerBounds", "options": {"layerId": 3}},
+  {"action": "getLayerBounds", "options": {"layerId": 4}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/work/logo-preview.jpg", "fileType": "JPG"}}
+]

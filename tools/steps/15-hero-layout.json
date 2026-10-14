@@ -1,0 +1,7 @@
+[
+  {"action": "scaleLayer", "options": {"layerId": 7, "width": 80, "height": 80, "anchorPosition": "MIDDLECENTER", "interpolationMethod": "AUTOMATIC"}},
+  {"action": "scaleLayer", "options": {"layerId": 8, "width": 22, "height": 22, "anchorPosition": "MIDDLECENTER", "interpolationMethod": "AUTOMATIC"}},
+  {"action": "getLayerBounds", "options": {"layerId": 7}},
+  {"action": "getLayerBounds", "options": {"layerId": 8}},
+  {"action": "getLayerBounds", "options": {"layerId": 6}}
+]

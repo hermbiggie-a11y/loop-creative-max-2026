@@ -1,0 +1,11 @@
+[
+  {"action": "translateLayer", "options": {"layerId": 5, "xOffset": 0, "yOffset": -50}},
+  {"action": "translateLayer", "options": {"layerId": 4, "xOffset": 0, "yOffset": -22}},
+  {"action": "translateLayer", "options": {"layerId": 3, "xOffset": 0, "yOffset": -10}},
+  {"action": "editTextLayer", "options": {"layerId": 3, "contents": "CABANA", "fontSize": 260, "fontName": "BebasNeue-Regular", "textColor": {"red": 59, "green": 36, "blue": 24}}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo.psd", "fileType": "PSD"}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo.png", "fileType": "PNG"}},
+  {"action": "editTextLayer", "options": {"layerId": 3, "contents": "CABANA", "fontSize": 260, "fontName": "BebasNeue-Regular", "textColor": {"red": 255, "green": 255, "blue": 255}}},
+  {"action": "editTextLayer", "options": {"layerId": 4, "contents": "C O L D   B R E W", "fontSize": 54, "fontName": "Montserrat-SemiBold", "textColor": {"red": 255, "green": 200, "blue": 69}}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo-light.png", "fileType": "PNG"}}
+]

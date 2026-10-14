@@ -1,0 +1,6 @@
+[
+  {"action": "createDocument", "options": {"name": "hero", "width": 3200, "height": 1600, "resolution": 72, "fillColor": {"red": 246, "green": 231, "blue": 203}, "colorMode": "RGB"}},
+  {"action": "createPixelLayer", "options": {"layerName": "beach", "opacity": 100, "fillNeutral": false, "blendMode": "NORMAL"}},
+  {"action": "createPixelLayer", "options": {"layerName": "can", "opacity": 100, "fillNeutral": false, "blendMode": "NORMAL"}},
+  {"action": "createPixelLayer", "options": {"layerName": "logo", "opacity": 100, "fillNeutral": false, "blendMode": "NORMAL"}}
+]

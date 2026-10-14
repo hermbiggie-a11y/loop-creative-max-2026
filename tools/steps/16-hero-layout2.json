@@ -1,0 +1,5 @@
+[
+  {"action": "translateLayer", "options": {"layerId": 7, "xOffset": -10, "yOffset": 100}},
+  {"action": "scaleLayer", "options": {"layerId": 8, "width": 380, "height": 380, "anchorPosition": "MIDDLECENTER", "interpolationMethod": "AUTOMATIC"}},
+  {"action": "getLayerBounds", "options": {"layerId": 8}}
+]

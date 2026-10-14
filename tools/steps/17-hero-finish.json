@@ -1,0 +1,6 @@
+[
+  {"action": "translateLayer", "options": {"layerId": 8, "xOffset": 911, "yOffset": 443}},
+  {"action": "addDropShadowLayerStyle", "options": {"layerId": 7, "blendMode": "MULTIPLY", "color": {"red": 59, "green": 36, "blue": 24}, "opacity": 45, "angle": 120, "distance": 30, "spread": 0, "size": 60}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/_master/hero.psd", "fileType": "PSD"}},
+  {"action": "saveDocumentAs", "options": {"filePath": "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/work/hero-preview.jpg", "fileType": "JPG"}}
+]

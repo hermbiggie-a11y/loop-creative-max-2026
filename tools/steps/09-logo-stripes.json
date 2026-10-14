@@ -1,0 +1,246 @@
+[
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  292,
+                                       "right":  380,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  89,
+                                      "red":  255,
+                                      "green":  111
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  380,
+                                       "right":  468,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  173,
+                                      "red":  31,
+                                      "green":  181
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  468,
+                                       "right":  556,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  89,
+                                      "red":  255,
+                                      "green":  111
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  556,
+                                       "right":  644,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  173,
+                                      "red":  31,
+                                      "green":  181
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  644,
+                                       "right":  732,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  89,
+                                      "red":  255,
+                                      "green":  111
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  732,
+                                       "right":  820,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  173,
+                                      "red":  31,
+                                      "green":  181
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "layerId":  5,
+                        "bounds":  {
+                                       "left":  820,
+                                       "right":  908,
+                                       "bottom":  185,
+                                       "top":  110
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "color":  {
+                                      "blue":  89,
+                                      "red":  255,
+                                      "green":  111
+                                  },
+                        "layerId":  5,
+                        "opacity":  100,
+                        "blendMode":  "NORMAL"
+                    },
+        "action":  "fillSelection"
+    },
+    {
+        "options":  {
+                        "antiAlias":  true,
+                        "bounds":  {
+                                       "left":  0,
+                                       "right":  0,
+                                       "bottom":  0,
+                                       "top":  0
+                                   },
+                        "feather":  0
+                    },
+        "action":  "selectRectangle"
+    },
+    {
+        "options":  {
+                        "visible":  false,
+                        "layerId":  2
+                    },
+        "action":  "setLayerVisibility"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo.psd",
+                        "fileType":  "PSD"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo.png",
+                        "fileType":  "PNG"
+                    },
+        "action":  "saveDocumentAs"
+    },
+    {
+        "options":  {
+                        "fontName":  "BebasNeue-Regular",
+                        "layerId":  3,
+                        "fontSize":  260,
+                        "textColor":  {
+                                          "blue":  255,
+                                          "red":  255,
+                                          "green":  255
+                                      },
+                        "contents":  "CABANA"
+                    },
+        "action":  "editTextLayer"
+    },
+    {
+        "options":  {
+                        "filePath":  "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/assets/logo-light.png",
+                        "fileType":  "PNG"
+                    },
+        "action":  "saveDocumentAs"
+    }
+]

@@ -1,0 +1,5 @@
+[
+  {"action": "createDocument", "options": {"name": "cabana-bg", "width": 2400, "height": 1600, "resolution": 72, "fillColor": {"red": 246, "green": 231, "blue": 203}, "colorMode": "RGB"}},
+  {"action": "generateImage", "timeout": 300, "options": {"layerName": "Miami beach", "contentType": "photo",
+    "prompt": "Sunny Miami Beach morning, turquoise ocean, white sand, a coral and white striped beach umbrella on the right edge, palm tree shadows on the sand, pastel art deco lifeguard tower far in the distance, bright clean summer advertising photography, wide empty sand in the center foreground, no people, no text"}}
+]

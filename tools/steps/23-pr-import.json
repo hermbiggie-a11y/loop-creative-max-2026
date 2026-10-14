@@ -1,0 +1,29 @@
+[
+    {
+        "app":  "premiere",
+        "timeout":  120,
+        "options":  {
+                        "filePaths":  [
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip01-pour.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip02-ice.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip03-beach.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip04-can-sand.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip05-cooler.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip06-waves.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip07-ocean-drive.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip08-cheers.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip09-sunset.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/clip10-hero-can.mp4",
+                                          "C:/Users/Dell Demo/Desktop/Demo/Loop Agency/cabana/raw/vo.wav"
+                                      ]
+                    },
+        "action":  "importMedia"
+    },
+    {
+        "app":  "premiere",
+        "options":  {
+
+                    },
+        "action":  "saveProject"
+    }
+]
