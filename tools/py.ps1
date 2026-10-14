@@ -6,7 +6,8 @@ $env:PYTHONUNBUFFERED = '1'
 Set-Location $PSScriptRoot
 $python = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
 $log = Join-Path $PSScriptRoot '..\cabana\work\py.log'   # tools/ is read-only
-$script, $rest = $args
+$script = $args[0]
+$rest = @($args | Select-Object -Skip 1)   # always an array: splatting a lone string would pass it character by character
 "`n=== $(Get-Date -Format s) $script $($rest -join ' ')" | Out-File -Append -Encoding utf8 $log
 & $python $script @rest 2>> $log
 $rc = $LASTEXITCODE
