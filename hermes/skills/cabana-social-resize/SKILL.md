@@ -1,7 +1,7 @@
 ---
 name: cabana-social-resize
 description: "Loop Creative beat 2b: build the Cabana social sizes live in Photoshop from the approved headline and export PNGs (also the 30-second 'Instagram Story' request)."
-version: 1.2.0
+version: 1.2.1
 author: Loop Creative
 platforms: [windows]
 metadata:
@@ -47,6 +47,9 @@ Reply with the Spanish line + `MEDIA:C:/Loop/cabana/social/1080x1080-es.png`. No
 - Do NOT resize with ffmpeg or Python imaging - the point is that Photoshop does it, visibly.
 - Do not call save_document_image_as_png (broken here). The script already saves PNGs.
 - MEDIA: paths must use C:/Loop/... (no spaces).
+
+## Reference output
+Approved sample set (Oct 13): C:/Loop/Golden/sample-set-2026-10-13/social/ - compare layouts against it.
 
 ## Verification
 The PNGs exist in C:/Loop/cabana/social/ and `done:` reports every requested size. Optionally `vision_analyze` one PNG to confirm the headline is readable and uncropped.
