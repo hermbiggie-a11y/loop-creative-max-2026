@@ -1,7 +1,7 @@
 ---
 name: cabana-hero
 description: "Loop Creative beat 2a: open the Cabana hero in Photoshop, extend the beach with Generative Fill, comp the headline, send three headline options."
-version: 1.0.0
+version: 1.0.1
 author: Loop Creative
 platforms: [windows]
 metadata:
@@ -25,7 +25,7 @@ User asks to open / extend / work on the Cabana hero, or asks for headline optio
 5. Clear the selection (select_rectangle with all-zero bounds on the beach layer).
 6. Write three headline options that follow the brief + brand.md voice (2-5 words, Bebas Neue, no "fuel/grind/hustle").
 7. `create_single_line_text_layer` with option 1 as a working comp: font BebasNeue-Regular, size 190, color Cabana Coral {255,111,89},
-   position {x:1080, y:300} (top third, clear of the can). Name it "headline".
+   position {x:1080, y:210} (baseline; keeps the headline above the can top at y~240). Name it "headline".
 8. `save_document_as` C:/Loop/cabana/work/hero.psd (PSD) and C:/Loop/cabana/work/hero-preview.jpg (JPG).
 9. Reply (short): one line on what changed, the three options numbered 1-3, "Which number?", and on its own line:
    MEDIA:C:/Loop/cabana/work/hero-preview.jpg

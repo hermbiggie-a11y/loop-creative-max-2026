@@ -70,6 +70,9 @@ def headline(text, max_w, max_h, color):
     r = call("photoshop", "createSingleLineTextLayer", {"layerName": "headline", "contents": text, "fontSize": size, "opacity": 100,
              "position": {"x": 10, "y": size}, "fontName": "BebasNeue-Regular", "textColor": color, "blendMode": "NORMAL"}, 30)
     lid = next(l["id"] for l in r["layers"] if l["name"] == "headline")
+    # new text layers inherit the last-used Character settings (e.g. wide tracking from the hero comp);
+    # re-applying the text through editTextLayer normalizes them
+    ps("editTextLayer", layerId=lid, contents=text, fontSize=size, fontName="BebasNeue-Regular", textColor=color)
     for _ in range(2):  # fit: shrink if the real width/height overshoot
         l, t, rr, b = bounds(lid)
         k = min(max_w / max(1, rr - l), max_h / max(1, b - t), 1.0)
