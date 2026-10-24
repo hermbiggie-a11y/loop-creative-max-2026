@@ -17,7 +17,7 @@ metadata:
 
 ## Footage (C:/Loop/cabana/raw, 4 s each, 1080p30)
 clip01-pour, clip02-ice, clip03-beach, clip04-can-sand, clip05-cooler, clip06-waves, clip07-ocean-drive,
-clip08-cheers, clip09-sunset, clip10-hero-can; voice-over vo-30.wav (28.4 s, script in vo-script.txt).
+clip08-cheers, clip09-sunset, clip10-hero-can; voice-over vo-30.wav (28.4 s incl. silence pad; Logan's voice cloned locally with Chatterbox, script in vo-script.txt).
 Default shot-list order (brief): pour, ice, beach, can-sand, cooler, waves, ocean-drive, cheers, hero-can (9 shots).
 
 ## Procedure - first cut
