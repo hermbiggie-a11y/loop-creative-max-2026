@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Loop · Hermes</title>
+<style>
+  :root {
+    --bg: #0e1621; --panel: #17212b; --in: #182533; --out: #2b5278; --text: #f5f5f5;
+    --muted: #708499; --accent: #6ab2f2; --green: #4fce5d; --red: #ef5b5b; --amber: #f2b84b;
+    --hud: #0b0f14; --hudline: #1f2a36;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text);
+    font: 16px/1.38 "Segoe UI", system-ui, sans-serif; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+
+  /* HUD: what's running on this laptop (not part of Telegram) */
+  #hud { background: var(--hud); border-bottom: 1px solid var(--hudline); padding: 10px 14px 8px; display: grid;
+    grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; }
+  #hud .lbl { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  #model { font-weight: 600; font-size: 15px; display: flex; gap: 8px; align-items: center; }
+  .chip { font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 2px 7px; border-radius: 9px; text-transform: uppercase; }
+  .chip.cloud { background: #1c3550; color: var(--accent); }
+  .chip.local { background: #3a2a10; color: var(--amber); }
+  #net { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; justify-self: end; }
+  #net .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+  #net.off .dot { background: var(--red); } #net.off { color: var(--red); }
+  #gpuwrap { grid-column: 1 / 3; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; }
+  #spark { width: 100%; height: 30px; display: block; }
+  #gpunum { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--muted); min-width: 150px; text-align: right; }
+
+  /* Telegram */
+  #tg { flex: 1; display: flex; flex-direction: column; min-height: 0; position: relative; }
+  #head { background: var(--panel); display: flex; align-items: center; gap: 12px; padding: 9px 14px; border-bottom: 1px solid #0c121a; }
+  .ava { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 18px;
+    background: linear-gradient(135deg, #ff8a65, #ff6f59 55%, #1fb5ad); flex: none; }
+  #head .name { font-weight: 600; font-size: 16px; }
+  #head .sub { font-size: 13px; color: var(--muted); }
+  #head .sub.typing { color: var(--accent); }
+  #sim { margin-left: auto; font-size: 10.5px; color: var(--muted); border: 1px solid #2a3a4b; border-radius: 6px; padding: 3px 6px; text-align: right; line-height: 1.25; }
+  #msgs { flex: 1; overflow-y: auto; padding: 14px 12px 8px; display: flex; flex-direction: column; gap: 6px; scroll-behavior: smooth;
+    background-color: var(--bg);
+    background-image: radial-gradient(circle at 20% 30%, rgba(106,178,242,.05) 0, transparent 40%),
+                      radial-gradient(circle at 80% 70%, rgba(79,206,93,.04) 0, transparent 45%); }
+  #msgs::-webkit-scrollbar { width: 0; }
+  .m { max-width: 86%; padding: 7px 11px 6px; border-radius: 14px; position: relative; word-wrap: break-word; animation: pop .18s ease-out; }
+  .m.u { align-self: flex-end; background: var(--out); border-bottom-right-radius: 4px; }
+  .m.b { align-self: flex-start; background: var(--in); border-bottom-left-radius: 4px; }
+  .m .t { float: right; font-size: 11.5px; color: #8fa6bd; margin: 6px 0 -2px 10px; }
+  .m.u .t { color: #9cc3e8; } .m.u .t::after { content: " ✓✓"; color: var(--accent); }
+  .m p { margin: 0 0 6px; } .m p:last-of-type { margin-bottom: 0; }
+  .m ul, .m ol { margin: 2px 0 6px 20px; }
+  .m code { font-family: Consolas, monospace; font-size: 14px; background: rgba(0,0,0,.25); padding: 0 4px; border-radius: 4px; }
+  .m b, .m strong { font-weight: 600; }
+  .media { display: grid; gap: 4px; margin: 2px -6px 6px; grid-template-columns: repeat(2, 1fr); }
+  .media.one { grid-template-columns: 1fr; }
+  .media img, .media video { width: 100%; border-radius: 10px; display: block; background: #000; max-height: 420px; object-fit: contain; }
+  .media.one img { width: auto; max-width: 100%; background: none; margin: 0 auto; }
+  .file { display: flex; gap: 10px; align-items: center; margin: 2px 0 6px; }
+  .file .ic { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; color: #0e1621; font-weight: 800; font-size: 12px; }
+  .sys { align-self: center; font-size: 13px; color: #c9d6e2; background: rgba(23,33,43,.85); padding: 3px 12px; border-radius: 12px; margin: 6px 0; }
+  @keyframes pop { from { transform: translateY(6px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  /* live agent activity */
+  #work { display: none; margin: 0 12px 6px; background: rgba(23,33,43,.95); border: 1px solid #243446; border-radius: 12px; padding: 8px 12px; font-size: 13.5px; }
+  #work.on { display: block; }
+  #work .hd { display: flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  #work .hd .el { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 400; }
+  #work .row { color: #b8c7d6; font-family: Consolas, monospace; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #work .row.cur { color: var(--text); }
+  #work .row .k { color: var(--amber); }
+  .dots span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 3px; animation: b 1.2s infinite; }
+  .dots span:nth-child(2) { animation-delay: .2s; } .dots span:nth-child(3) { animation-delay: .4s; }
+  @keyframes b { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+
+  #composer { background: var(--panel); display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-top: 1px solid #0c121a; }
+  #composer .clip { color: var(--muted); font-size: 22px; transform: rotate(45deg); }
+  #input { flex: 1; min-height: 24px; color: var(--text); font-size: 16px; white-space: pre-wrap; }
+  #input:empty::before { content: "Write a message…"; color: var(--muted); }
+  #input.typing::after { content: ""; display: inline-block; width: 2px; height: 18px; background: var(--accent); margin-left: 1px; vertical-align: -3px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  #send { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: var(--accent); font-size: 20px; }
+  #send.ready { background: var(--accent); color: #0e1621; }
+
+  /* simulated login */
+  #login { position: absolute; inset: 0; background: var(--panel); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; padding: 30px; z-index: 5; }
+  #login.on { display: flex; }
+  #login .logo { width: 110px; height: 110px; border-radius: 50%; background: #2aabee; display: grid; place-items: center; }
+  #login h1 { font-size: 24px; font-weight: 600; }
+  #login .lead { color: var(--muted); font-size: 15px; max-width: 380px; }
+  #login .field { width: 340px; border: 1.5px solid var(--accent); border-radius: 10px; padding: 12px 14px; text-align: left; font-size: 17px; letter-spacing: .04em; min-height: 50px; }
+  #login .field small { display: block; font-size: 11px; color: var(--accent); letter-spacing: 0; margin-bottom: 2px; }
+  #login .btn { width: 340px; background: #2aabee; border-radius: 10px; padding: 12px; font-weight: 600; letter-spacing: .03em; }
+  #login .ok { color: var(--green); font-weight: 600; font-size: 18px; display: none; }
+  #login.done .ok { display: block; }
+  #login .tag { position: absolute; bottom: 14px; font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div id="hud">
+  <div><div class="lbl">Brain</div><div id="model">—</div></div>
+  <div id="net"><span class="dot"></span><span id="nettxt">Wi-Fi on</span></div>
+  <div id="gpuwrap">
+    <span class="lbl">GPU · RTX PRO 5000</span>
+    <svg id="spark" viewBox="0 0 300 30" preserveAspectRatio="none"><polyline id="sparkl" fill="rgba(79,206,93,.18)" stroke="#4fce5d" stroke-width="1.6" points=""/></svg>
+    <span id="gpunum">0% · 0.0 / 24 GB</span>
+  </div>
+</div>
+
+<div id="tg">
+  <div id="head">
+    <div class="ava">L</div>
+    <div><div class="name">Loop · Hermes</div><div class="sub" id="sub">bot</div></div>
+    <div id="sim">Simulated Telegram view<br>live agent output</div>
+  </div>
+  <div id="msgs"></div>
+  <div id="work"><div class="hd"><span class="dots"><span></span><span></span><span></span></span><span id="worktitle">Hermes is working</span><span class="el" id="el">0s</span></div><div id="rows"></div></div>
+  <div id="composer"><span class="clip">📎</span><div id="input"></div><div id="send">➤</div></div>
+
+  <div id="login">
+    <div class="logo"><svg width="58" height="58" viewBox="0 0 24 24"><path fill="#fff" d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 9-8.1c.4-.3-.1-.5-.6-.2L6.4 13.3l-4.8-1.5c-1-.3-1-1 .2-1.5L20.5 3c.9-.3 1.6.2 1.4 1.3z"/></svg></div>
+    <h1>Telegram Desktop</h1>
+    <div class="lead">Log in with your phone number. Telegram sends a code to the app on your phone.</div>
+    <div class="field"><small>Phone number</small><span id="phone"></span></div>
+    <div class="field" id="codef" style="display:none"><small>Code from your phone</small><span id="code"></span></div>
+    <div class="btn">NEXT</div>
+    <div class="ok">✓ Logged in — opening Loop · Hermes</div>
+    <div class="tag">Simulated for the recording — no real account is used</div>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const msgs = $('#msgs'); let shown = new Set(); let lastWork = null;
+const hist = Array(90).fill(0);
+
+function md(s) {
+  const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const lines = esc(s.trim()).split('\n'); let html = '', list = null;
+  const inline = t => t.replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|\W)\*([^*\n]+)\*(?=\W|$)/g, '$1<i>$2</i>');
+  for (const raw of lines) {
+    const l = raw.trimEnd(); const li = l.match(/^\s*(?:[-•*]|\d+[.)])\s+(.*)$/);
+    if (li) { if (!list) { list = /^\s*\d/.test(l) ? 'ol' : 'ul'; html += `<${list}>`; } html += `<li>${inline(li[1])}</li>`; continue; }
+    if (list) { html += `</${list}>`; list = null; }
+    if (!l.trim()) continue;
+    html += `<p>${inline(l.replace(/^#+\s*/, ''))}</p>`;
+  }
+  if (list) html += `</${list}>`;
+  return html;
+}
+function hhmm(ts) { const d = new Date(ts * 1000); return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+function mediaHtml(media, id) {
+  if (!media || !media.length) return '';
+  const vis = media.filter(m => m.kind !== 'file');
+  let h = vis.length ? `<div class="media ${vis.length === 1 ? 'one' : ''}">` + vis.map(m => m.kind === 'video'
+      ? `<video src="/media?p=${encodeURIComponent(m.path)}&v=${id}" muted autoplay loop playsinline></video>`
+      : `<img src="/media?p=${encodeURIComponent(m.path)}&v=${id}">`).join('') + '</div>' : '';
+  for (const m of media.filter(m => m.kind === 'file'))
+    h += `<div class="file"><div class="ic">${m.path.split('.').pop().toUpperCase()}</div><div>${m.path.split('/').pop()}</div></div>`;
+  return h;
+}
+function addMsg(m) {
+  const el = document.createElement('div');
+  if (m.from === 'sys') { el.className = 'sys'; el.textContent = m.text; }
+  else { el.className = 'm ' + (m.from === 'user' ? 'u' : 'b'); el.innerHTML = mediaHtml(m.media, m.id) + md(m.text || '') + `<span class="t">${hhmm(m.ts)}</span>`; }
+  msgs.appendChild(el);
+  el.querySelectorAll('img,video').forEach(x => x.addEventListener(x.tagName === 'IMG' ? 'load' : 'loadeddata', scroll));
+  scroll();
+}
+function scroll() { msgs.scrollTop = msgs.scrollHeight; }
+
+function render(s) {
+  if (!s || !s.messages) return;
+  $('#login').classList.toggle('on', s.scene === 'login');
+  if (s.login) { $('#phone').textContent = s.login.phone || ''; $('#codef').style.display = s.login.code !== undefined ? '' : 'none';
+    $('#code').textContent = s.login.code || ''; $('#login').classList.toggle('done', !!s.login.done); }
+  if (s.model) $('#model').innerHTML = `${s.model.name} <span class="chip ${s.model.where}">${s.model.where === 'local' ? 'on this GPU' : 'cloud'}</span>`;
+  if (s.reset_id !== render.rid || s.messages.length < shown.size) { render.rid = s.reset_id; msgs.innerHTML = ''; shown = new Set(); }
+  for (const m of s.messages) if (!shown.has(m.id)) { shown.add(m.id); addMsg(m); }
+  const inp = $('#input'); inp.textContent = s.composer || ''; inp.classList.toggle('typing', !!s.composer);
+  $('#send').classList.toggle('ready', !!s.composer);
+  const w = s.working; $('#work').classList.toggle('on', !!(w && w.active));
+  $('#sub').textContent = w && w.active ? 'typing…' : 'bot'; $('#sub').classList.toggle('typing', !!(w && w.active));
+  if (w && w.active) {
+    $('#worktitle').textContent = w.title || 'Hermes is working';
+    const key = JSON.stringify(w.tools);
+    if (key !== lastWork) { lastWork = key;
+      $('#rows').innerHTML = (w.tools || []).slice(-4).map((t, i, a) => `<div class="row ${i === a.length - 1 ? 'cur' : ''}"><span class="k">${t.tool}</span> ${t.detail || ''}</div>`).join(''); scroll(); }
+    render.wstart = w.since;
+  }
+}
+setInterval(() => { if (render.wstart) $('#el').textContent = Math.max(0, Math.round(Date.now() / 1000 - render.wstart)) + 's'; }, 250);
+async function poll() { try { render(await (await fetch('/state', { cache: 'no-store' })).json()); } catch (e) {} setTimeout(poll, 250); }
+async function stats() {
+  try {
+    const s = await (await fetch('/stats', { cache: 'no-store' })).json();
+    hist.push(s.gpu); while (hist.length > 90) hist.shift();
+    const pts = hist.map((v, i) => `${(i / 89 * 300).toFixed(1)},${(30 - v / 100 * 28 - 1).toFixed(1)}`);
+    $('#sparkl').setAttribute('points', `0,30 ${pts.join(' ')} ${(hist.length - 1) / 89 * 300},30`);
+    $('#gpunum').textContent = `${s.gpu}% · ${(s.vram_used / 1024).toFixed(1)} / ${Math.round(s.vram_total / 1024)} GB`;
+    $('#net').classList.toggle('off', !s.online); $('#nettxt').textContent = s.online ? 'Online' : 'Offline — nothing leaves this laptop';
+  } catch (e) {}
+  setTimeout(stats, 1000);
+}
+poll(); stats();
+</script>
+</body>
+</html>

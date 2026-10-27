@@ -1,0 +1,407 @@
+From 60984ea68197dd7ccd30fae194fb847c0aa7b6ab Mon Sep 17 00:00:00 2001
+From: Dell Demo <hermbiggie@gmail.com>
+Date: Tue, 13 Oct 2026 21:28:44 -0500
+Subject: [PATCH 1/2] Loop demo patches for Windows / Photoshop 27 / Premiere
+ 26
+
+- ps placeImage: keep layer name, rasterize the new layer id, optional rasterize:false
+- ps closeAllDocuments command; no-document responses are not failures
+- pr closeProject command; open/create project, frame and sequence export use backslash paths on Windows
+- pr: connect on launch by default and at plugin start (panel not required); await edit transactions
+---
+ adb-proxy-socket/package-lock.json |  3 ++
+ uxp/pr/commands/core.js            | 56 ++++++++++++++++++++----------
+ uxp/pr/commands/index.js           |  2 +-
+ uxp/pr/main.js                     | 21 ++++++++---
+ uxp/ps/commands/core.js            | 26 ++++++++++++--
+ uxp/ps/commands/index.js           |  2 +-
+ uxp/ps/main.js                     | 18 ++++++----
+ 7 files changed, 95 insertions(+), 33 deletions(-)
+
+diff --git a/adb-proxy-socket/package-lock.json b/adb-proxy-socket/package-lock.json
+index 4b58a97..9e965f5 100644
+--- a/adb-proxy-socket/package-lock.json
++++ b/adb-proxy-socket/package-lock.json
+@@ -12,6 +12,9 @@
+         "express": "^4.21.2",
+         "socket.io": "^4.8.1",
+         "socket.io-client": "^4.8.1"
++      },
++      "bin": {
++        "adb-proxy-socket": "proxy.js"
+       }
+     },
+     "node_modules/@socket.io/component-emitter": {
+diff --git a/uxp/pr/commands/core.js b/uxp/pr/commands/core.js
+index e6b66e2..ba47807 100644
+--- a/uxp/pr/commands/core.js
++++ b/uxp/pr/commands/core.js
+@@ -32,12 +32,26 @@ const saveProjectAs = async (command) => {
+     project.saveAs(filePath)
+ }
+ 
++// Loop demo addition: close every open project (save first so Premiere never prompts) - used by reset
++const closeProject = async (command) => {
++    let closed = []
++    for (let i = 0; i < 10; i++) {
++        const project = await app.Project.getActiveProject()
++        if (!project) break
++        closed.push(project.name)
++        try { await project.save() } catch (e) { /* unsaved new project: close anyway */ }
++        await project.close()
++    }
++    return { closed }
++}
++
+ const openProject = async (command) => {
+ 
+     const options = command.options;
+-    const filePath = options.filePath;
++    // Loop demo fix: Premiere on Windows can't find projects given with forward slashes
++    const filePath = window.path.sep === "\\" ? options.filePath.replace(/\//g, "\\") : options.filePath;
+ 
+-    await app.Project.open(filePath);    
++    await app.Project.open(filePath);
+ }
+ 
+ 
+@@ -97,7 +111,7 @@ const addMediaToSequence = async (command) => {
+ 
+     //let f = ((options.overwrite) ? editor.createOverwriteItemAction : editor.createInsertProjectItemAction).bind(editor)
+     //let action = f(insertItem, insertionTime, videoTrackIndex, audioTrackIndex, limitShift)
+-    execute(() => {
++    await execute(() => {
+         let action = editor.createOverwriteItemAction(insertItem, insertionTime, videoTrackIndex, audioTrackIndex)
+         return [action]
+     }, project)  
+@@ -139,7 +153,7 @@ const setVideoClipProperties = async (command) => {
+     let mode = BLEND_MODES[options.blendMode.toUpperCase()]
+     let blendModeKeyframe = await blendModeParam.createKeyframe(mode)
+ 
+-    execute(() => {
++    await execute(() => {
+         let opacityAction = opacityParam.createSetValueAction(opacityKeyframe);
+         let blendModeAction = blendModeParam.createSetValueAction(blendModeKeyframe);
+         return [opacityAction, blendModeAction]
+@@ -196,7 +210,9 @@ const createProject = async (command) => {
+     }
+ 
+     //todo: this will open a dialog if directory doesnt exist
+-    let project = await app.Project.createProject(`${path}${name}.prproj`) 
++    let projectPath = `${path}${name}.prproj`
++    if (window.path.sep === "\\") projectPath = projectPath.replace(/\//g, "\\")
++    let project = await app.Project.createProject(projectPath)
+ 
+ 
+     if(!project) {
+@@ -218,10 +234,11 @@ const _exportFrame = async (sequence, filePath, seconds) => {
+     let p = window.path.parse(filePath)
+     let t = app.TickTime.createWithSeconds(seconds)
+ 
+-    let out = await app.Exporter.exportSequenceFrame(sequence, t, p.base, p.dir, size.width, size.height)
++    // Loop demo fix: on Windows exportSequenceFrame returns false for forward-slash folders
++    let dir = window.path.sep === "\\" ? p.dir.replace(/\//g, "\\") : p.dir
++    let out = await app.Exporter.exportSequenceFrame(sequence, t, p.base, dir, size.width, size.height)
+ 
+-    let ps = `${p.dir}${window.path.sep}${p.base}`
+-    let outPath = `${ps}.${fileType}`
++    let outPath = `${dir}${window.path.sep}${p.base}`
+ 
+     if(!out) {
+         throw new Error(`exportFrame : Could not save frame to [${outPath}]`);
+@@ -260,7 +277,7 @@ const setClipDisabled = async (command) => {
+ 
+     let trackItem = await getTrack(sequence, trackIndex, trackItemIndex, trackType)
+ 
+-    execute(() => {
++    await execute(() => {
+         let action = trackItem.createSetDisabledAction(options.disabled)
+         return [action]
+     }, project)
+@@ -291,7 +308,7 @@ const appendVideoTransition = async (command) => {
+     transitionOptions.setDuration(time)
+     transitionOptions.setTransitionAlignment(options.clipAlignment)
+ 
+-    execute(() => {
++    await execute(() => {
+         let action = trackItem.createAddVideoTransitionAction(transition, transitionOptions)
+         return [action]
+     }, project)
+@@ -359,7 +376,7 @@ const setClipStartEndTimes = async (command) => {
+ 
+     let project = await app.Project.getActiveProject();
+ 
+-    execute(() => {
++    await execute(() => {
+ 
+         let out = []
+ 
+@@ -414,7 +431,7 @@ const _closeGapsOnSequence = async (sequence, trackIndex, trackType) => {
+         let item = items[i];
+         let shiftTick = await f(item, targetPosition)
+         
+-        execute(() => {
++        await execute(() => {
+             let out = []
+ 
+                 out.push(item.createMoveAction(shiftTick))
+@@ -458,7 +475,7 @@ const removeItemFromSequence = async (command) => {
+ 
+     trackItemSelection.addItem(item, true)
+ 
+-    execute(() => {
++    await execute(() => {
+         const shiftOverlapping = false
+         let action = editor.createRemoveItemsAction(trackItemSelection, rippleDelete, constants.MediaType.ANY, shiftOverlapping )
+         return [action]
+@@ -483,7 +500,7 @@ const addMarkerToSequence = async (command) => {
+ 
+     let project = await app.Project.getActiveProject()
+ 
+-    execute(() => {
++    await execute(() => {
+ 
+         let start = app.TickTime.createWithTicks(startTimeTicks.toString())
+         let duration = app.TickTime.createWithTicks(durationTicks.toString())
+@@ -521,7 +538,7 @@ const moveProjectItemsToBin = async (command) => {
+ 
+     const rootFolderItem = await project.getRootItem()
+ 
+-    execute(() => {
++    await execute(() => {
+ 
+         let actions = []
+ 
+@@ -543,7 +560,7 @@ const createBinInActiveProject = async (command) => {
+     const project = await app.Project.getActiveProject()
+     const folderItem = await project.getRootItem()
+ 
+-    execute(() => {
++    await execute(() => {
+         let action = folderItem.createBinAction(binName, true)
+         return [action]
+     }, project)
+@@ -552,8 +569,10 @@ const createBinInActiveProject = async (command) => {
+ const exportSequence = async (command) => {
+     const options = command.options;
+     const sequenceId = options.sequenceId;
+-    const outputPath = options.outputPath;
+-    const presetPath = options.presetPath;
++    // Loop demo fix: Premiere on Windows wants backslash paths for exports
++    const toNative = (s) => (window.path.sep === "\\" && s ? s.replace(/\//g, "\\") : s);
++    const outputPath = toNative(options.outputPath);
++    const presetPath = toNative(options.presetPath);
+ 
+     const manager = await app.EncoderManager.getManager();
+ 
+@@ -571,6 +590,7 @@ const commandHandlers = {
+     removeItemFromSequence,
+     setClipStartEndTimes,
+     openProject,
++    closeProject,
+     saveProjectAs,
+     saveProject,
+     getProjectInfo,
+diff --git a/uxp/pr/commands/index.js b/uxp/pr/commands/index.js
+index 9d80478..27b4566 100644
+--- a/uxp/pr/commands/index.js
++++ b/uxp/pr/commands/index.js
+@@ -126,7 +126,7 @@ const checkRequiresActiveProject = async (command) => {
+ };
+ 
+ const requiresActiveProject = (command) => {
+-    return !["createProject", "openProject"].includes(command.action);
++    return !["createProject", "openProject", "closeProject"].includes(command.action);
+ };
+ 
+ const commandHandlers = {
+diff --git a/uxp/pr/main.js b/uxp/pr/main.js
+index b11cd5f..b77cb2e 100755
+--- a/uxp/pr/main.js
++++ b/uxp/pr/main.js
+@@ -55,8 +55,14 @@ const onCommandPacket = async (packet) => {
+ 
+         out.response = response;
+         out.status = "SUCCESS";
+-        out.sequences = await getSequences();
+-        out.project = await getProjectInfo();
++        try {
++            out.sequences = await getSequences();
++            out.project = await getProjectInfo();
++        } catch (e) {
++            // Loop demo: no project open (e.g. after closeProject) is not a failure
++            out.sequences = [];
++            out.project = null;
++        }
+     } catch (e) {
+         console.log(e);
+ 
+@@ -170,7 +176,7 @@ document
+ 
+ // Retrieve checkbox state
+ const getConnectOnLaunch = () => {
+-    return JSON.parse(window.localStorage.getItem(CONNECT_ON_LAUNCH)) || false;
++    const v = window.localStorage.getItem(CONNECT_ON_LAUNCH); return v === null ? true : JSON.parse(v); // Loop demo: connect on launch by default
+ };
+ 
+ // Set checkbox state on page load
+@@ -180,7 +186,14 @@ document.addEventListener("DOMContentLoaded", () => {
+ });
+ 
+ window.addEventListener("load", (event) => {
+-    if (getConnectOnLaunch()) {
++    if (getConnectOnLaunch() && !socket) {
+         connectToServer();
+     }
+ });
++
++// Loop demo: Premiere may not fire "load" until the panel is opened; connect at plugin start regardless.
++setTimeout(() => {
++    if (getConnectOnLaunch() && !socket) {
++        connectToServer();
++    }
++}, 1500);
+diff --git a/uxp/ps/commands/core.js b/uxp/ps/commands/core.js
+index 7615381..954fa01 100644
+--- a/uxp/ps/commands/core.js
++++ b/uxp/ps/commands/core.js
+@@ -57,6 +57,17 @@ const openFile = async (command) => {
+     });
+ };
+ 
++// Loop demo addition: close every open document without saving (used by the demo reset)
++const closeAllDocuments = async (command) => {
++    const names = app.documents.map((d) => d.name);
++    await execute(async () => {
++        for (const doc of [...app.documents]) {
++            await doc.closeWithoutSaving();
++        }
++    });
++    return { closed: names };
++};
++
+ const placeImage = async (command) => {
+     let options = command.options;
+     let layerId = options.layerId;
+@@ -66,6 +77,11 @@ const placeImage = async (command) => {
+         throw new Error(`placeImage : Could not find layerId : ${layerId}`);
+     }
+ 
++    // Loop demo fix: the place replaces the layer (new id), so keep the original name and
++    // rasterize the new layer instead of the stale id.
++    const originalName = layer.name;
++    let placedId = null;
++
+     await execute(async () => {
+         selectLayer(layer, true);
+         let layerId = layer.id;
+@@ -115,14 +131,19 @@ const placeImage = async (command) => {
+                 ],
+                 to: {
+                     _obj: "layer",
+-                    name: layerId,
++                    name: originalName,
+                 },
+             },
+         ];
+ 
+         await action.batchPlay(commands, {});
+-        await rasterizeLayer(command);
++        placedId = app.activeDocument.activeLayers[0].id;
+     });
++    // options.rasterize === false keeps a smart object (sharp when scaled afterwards)
++    if (options.rasterize !== false) {
++        await rasterizeLayer({ options: { layerId: placedId } });
++    }
++    return { layerId: placedId, name: originalName };
+ };
+ 
+ const getDocumentImage = async (command) => {
+@@ -531,6 +552,7 @@ const executeBatchPlayCommand = async (commands) => {
+ }
+ 
+ const commandHandlers = {
++    closeAllDocuments,
+     generativeFill,
+     executeBatchPlayCommand,
+     setActiveDocument,
+diff --git a/uxp/ps/commands/index.js b/uxp/ps/commands/index.js
+index 4bf7aa8..99944ec 100644
+--- a/uxp/ps/commands/index.js
++++ b/uxp/ps/commands/index.js
+@@ -67,7 +67,7 @@ const checkRequiresActiveDocument = (command) => {
+ };
+ 
+ const requiresActiveDocument = (command) => {
+-    return !["createDocument", "openFile"].includes(command.action);
++    return !["createDocument", "openFile", "closeAllDocuments"].includes(command.action);
+ };
+ 
+ const commandHandlers = {
+diff --git a/uxp/ps/main.js b/uxp/ps/main.js
+index bab03c1..edf75f4 100755
+--- a/uxp/ps/main.js
++++ b/uxp/ps/main.js
+@@ -56,13 +56,17 @@ const onCommandPacket = async (packet) => {
+         out.response = response;
+         out.status = "SUCCESS";
+ 
++        // Loop demo: after closeAllDocuments there is no active document - not a failure
+         let activeDocument = app.activeDocument
+-        let doc = generateDocumentInfo(activeDocument, activeDocument)
+-        out.document = doc;
+-
+-        out.layers = await getLayers();
+-
+-        out.hasActiveSelection = hasActiveSelection();
++        if (activeDocument) {
++            out.document = generateDocumentInfo(activeDocument, activeDocument);
++            out.layers = await getLayers();
++            out.hasActiveSelection = hasActiveSelection();
++        } else {
++            out.document = null;
++            out.layers = [];
++            out.hasActiveSelection = false;
++        }
+     } catch (e) {
+         out.status = "FAILURE";
+         out.message = `Error calling ${command.action} : ${e}`;
+@@ -213,7 +217,7 @@ document
+ 
+ // Retrieve checkbox state
+ const getConnectOnLaunch = () => {
+-    return JSON.parse(window.localStorage.getItem(CONNECT_ON_LAUNCH)) || false;
++    const v = window.localStorage.getItem(CONNECT_ON_LAUNCH); return v === null ? true : JSON.parse(v); // Loop demo: connect on launch by default
+ };
+ 
+ // Set checkbox state on page load
+-- 
+2.55.0.windows.5
+
+
+From 5b419031d02a4e8eeb67829da5c0a49ab84e9eed Mon Sep 17 00:00:00 2001
+From: Dell Demo <hermbiggie@gmail.com>
+Date: Tue, 13 Oct 2026 23:07:10 -0500
+Subject: [PATCH 2/2] ps createSingleLineTextLayer: reset tracking to 0 (new
+ layers inherit Character panel settings)
+
+---
+ uxp/ps/commands/layers.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/uxp/ps/commands/layers.js b/uxp/ps/commands/layers.js
+index ca02034..22adb6e 100644
+--- a/uxp/ps/commands/layers.js
++++ b/uxp/ps/commands/layers.js
+@@ -662,6 +662,8 @@ const createSingleLineTextLayer = async (command) => {
+         a.blendMode = getBlendMode(options.blendMode);
+         a.name = options.layerName;
+         a.opacity = options.opacity;
++        // Loop demo: new text layers inherit the last Character panel settings (e.g. wide tracking) - reset them
++        try { a.textItem.characterStyle.tracking = options.tracking || 0; } catch (e) { }
+     });
+ };
+ 
+-- 
+2.55.0.windows.5
+

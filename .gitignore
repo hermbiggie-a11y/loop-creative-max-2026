@@ -27,3 +27,18 @@ Adobe Premiere Pro Auto-Save/
 .env
 *.env
 tools/license.txt
+
+# video tooling outputs (recordings, renders, voice data) never go in the repo
+video/rig/runs/
+video/rig/state.json
+video/rig/edge-profile/
+video/post/out/
+video/post/ov/
+video/post/narr*/
+video/post/assets/
+video/voice/samples/
+video/voice/takes/
+video/docx/node_modules/
+video/docx/frames/
+*.wav
+*.m4a

@@ -1,0 +1,107 @@
+"""Narration for the narrated version: (video time in seconds, id, line[, seed]). Logan's cloned voice, first person.
+Times are against out/loop-backup.mp4 (see out/timeline.json). Keep each line short enough to end before the next."""
+
+LINES = [
+    # ---- title (0:00-0:12)
+    (0.6, "n001", "Quick confession before we start. This isn't me talking. It's my voice, cloned by AI, right here on this laptop."),
+    (8.0, "n002", "Welcome to Loop... Creative. Three people, one agent, one laptop.", 4),   # "Loop..." or it says "Luke"
+    # ---- cold open (0:12-1:27)
+    (13.5, "n003", "That's real Photoshop on the left, and my phone on the right. I'm going to text the agent just one line: resize the hero for an Instagram Story.", 3),
+    (26.5, "n004", "Hermes picks up the message, loads a skill it already knows for resizing, and starts driving Photoshop directly. No screen scraping, and no separate AI app."),
+    (41.5, "n005", "Watch the layers. It makes a new tall document, places the hero, re-sets the headline so it fits, and exports."),
+    (56.0, "n006", "This is the part of the job nobody got into design to do."),
+    (81.4, "n007", "And there it is on my phone. I made the creative call. The agent did the clicking."),
+    # ---- built with AI card (1:27-2:12)
+    (88.0, "n010", "A little about me. I'm Logan Lawler, and I lead AI strategy for Dell Pro Precision. I'm an AI guy, not an agency guy. Honestly, I don't know how to use Photoshop."),
+    (101.5, "n011", "So everything you're about to see was built with AI. Hermes, an open source agent, runs the agency. Claude Code wrote the scripts and the skills, and it cut this video."),
+    (113.5, "n012", "Firefly does the generative fill inside Photoshop. Whisper writes the captions. And the voice you're hearing is mine, cloned from twenty six seconds of audio."),
+    (124.0, "n013", "Is it pretty? Not really. Now imagine it in the hands of someone who actually knows design."),
+    # ---- diagram (2:12-2:57)
+    (133.0, "n014", "Here's how it fits together. I talk to the agent from my phone, through Telegram."),
+    (139.5, "n015", "The agent, Hermes, lives right here on this Dell Pro Max. It has memory, it has skills, and it has tools."),
+    (148.0, "n016", "When we're online, it thinks with Claude in the cloud. When the network is gone, it switches to an open weight model running on this laptop's own G P U."),
+    (158.5, "n017", "And it reaches into real Photoshop and real Premiere through a small, open source bridge. It's not scraping the screen, and it's not some separate AI app."),
+    (170.0, "n018", "Most important: there's a human at every gate."),
+    # ---- four rules (2:57-3:27)
+    (178.0, "n019", "Four rules for how Loop... works."),
+    (181.5, "n020", "One. It never makes the creative call. A human picks, every time."),
+    (187.5, "n021", "Two. It works in the apps you already own."),
+    (191.5, "n022", "Three. It runs on hardware you own. Pull the plug, and it keeps going."),
+    (197.5, "n023", "And four. It gets better with every job, because it writes down what it learns."),
+    # ---- login (3:27-3:42)
+    (207.5, "n024", "Connecting it is simple. You log into Telegram, and you message a bot that talks to the agent on this laptop."),
+    (216.0, "n025", "This login is simulated for the recording. Live, I'll show you the real thing."),
+    # ---- beat 1 (3:42-5:07)
+    (223.0, "n030", "Beat one. Brief in, brief out."),
+    (226.0, "n031", "Our client is Cabana Cold Brew, a canned coffee launching in Miami."),
+    (232.0, "n032", "One message has the whole job: a hero visual, six social sizes, a thirty second spot, and captions."),
+    (242.5, "n033", "Hermes reads the client's brand sheet, then writes a one page creative brief, with two directions and a shot list."),
+    (264.0, "n034", "And here's my favorite part. It doesn't guess. It asks me. A, or B?"),
+    (271.2, "n035", "That's the real brief, written to the project folder."),
+    (276.0, "n036", "I pick B, and tell it to make the headline shorter."),
+    (285.0, "n037", "It updates the brief, and saves my choice to memory. Every beat after this one uses it."),
+    (296.5, "n038", "I never have to repeat myself."),
+    # ---- beat 2 (5:07-6:58)
+    (307.5, "n040", "Beat two. The hero visual, and six social sizes."),
+    (316.5, "n041", "I ask for the hero: extend the beach with generative fill, put our headline on it, and send me three options."),
+    (328.0, "n042", "That's the real hero file opening in Photoshop. Real layers, not a mockup."),
+    (346.5, "n043", "And that's Firefly, Adobe's generative AI, running inside Photoshop. The agent selects the edge of the canvas, and asks Firefly to keep the beach going."),
+    (369.0, "n044", "Now the right side."),
+    (377.0, "n045", "Generative fill is the one step here that needs the cloud. Hold that thought for later."),
+    (389.5, "n046", "Then the headline, in the brand font and the brand coral, straight from the brief."),
+    (408.5, "n047", "Three headline options land on my phone. Iced Miami. Brew Loud. Cold Cabana. I pick number two."),
+    # ---- audience question (6:58-7:13)
+    (419.0, "n048", "Quick show of hands. How long would six social resizes take you? New document, place the image, re-set the headline, export. Six times."),
+    (429.0, "n049", "Keep that number in mind, and watch the clock."),
+    # ---- six sizes (7:13-10:58)
+    (436.0, "n050", "The clock starts when I pick. First it swaps the headline to Brew Loud, and remembers my choice."),
+    (458.5, "n051", "Now the six sizes. Square, story, portrait, landscape, a link card, and a banner."),
+    (475.0, "n052", "This is all one skill, written once. The agent calls it, and Photoshop does the actual work, size by size."),
+    (500.0, "n053", "Watch the folder in the bottom corner. Every file that shows up there is a real export, ready to post."),
+    (530.0, "n054", "This is the busywork. Nobody went to art school to resize a banner for the fifth time."),
+    (560.0, "n055", "Notice what it's not doing. It's not picking the headline, the image, or the direction. I did all of that. It's doing the clicking."),
+    (595.0, "n056", "Each size gets its own layout. The headline is re-set to fit the shape, not just stretched."),
+    (637.0, "n057", "And before it reports back, it looks at its own work."),
+    (644.0, "n058", "All six, done in about three and a half minutes. Next client, this is one message."),
+    (651.0, "n059", "How does that compare to your number?"),
+    # ---- beat 3 (10:58-14:26)
+    (658.5, "n060", "Beat three. Raw footage in, a thirty second spot out."),
+    (668.0, "n061", "I ask for a rough cut, in shot list order, and frames to review."),
+    (682.5, "n062", "Watch the chain. First it takes inventory of the raw footage."),
+    (691.5, "n063", "Then it transcribes the voice over, on this G P U, with no internet needed. That's where the captions come from."),
+    (702.5, "n064", "It looks at stills from each clip to tag them: the pour, the ice, the beach, the can."),
+    (712.0, "n065", "And now Premiere. It creates the sequence, lays the clips in shot list order, trims everything to exactly thirty seconds, and adds the dissolves."),
+    (735.0, "n066", "Premiere has its own AI assistant for organizing bins and building stringouts. Hermes sits a level above that. It talks to Photoshop, to my phone, and it remembers the client."),
+    (750.0, "n067", "Four frames land on my phone for review."),
+    (757.5, "n068", "And I give notes, just like I would to an editor. Open on the pour, drop the beach shot, shorter dissolves."),
+    (772.0, "n069", "It re-cuts. Beach shot out, quicker dissolves, still exactly thirty seconds."),
+    (806.0, "n070", "New frames. The notes are honored."),
+    (813.0, "n071", "And nothing exports until a human says go."),
+    (823.0, "n072", "Now it exports the final spot, writes the caption file, and makes a captioned preview."),
+    (852.0, "n073", "The preview lands on my phone. Let's watch it."),
+    (860.2, "n074", "The voice over in this spot is mine too, cloned by AI."),
+    # ---- beat 4 (14:56-18:54)
+    (897.3, "n080", "Beat four. What happens when the internet goes away?"),
+    (905.5, "n081", "I'm turning the Wi-Fi off. Right now."),
+    (914.0, "n082", "Watch the badge in the corner. Offline. From here on, nothing leaves this laptop."),
+    (920.0, "n083", "The agent switches brains, to an open weight model running on the graphics card in this laptop."),
+    (929.0, "n084", "Same kind of request as any other day: a Spanish version of the square post, for the Little Havana launch."),
+    (945.0, "n085", "See the G P U graph climbing? That's the model thinking, right here, on the laptop."),
+    (970.0, "n086", "For a lot of agencies, this matters. Client work, unreleased products, embargoed launches. None of it has to touch the cloud."),
+    (990.0, "n087", "The smaller model's replies are a bit rougher than the cloud model's. But the Photoshop work is exactly the same."),
+    (1012.5, "n088", "Cafe Fuerte. Made with the network off."),
+    (1017.0, "n089", "Then I ask: what did you learn today?"),
+    (1040.0, "n090", "It keeps notes about the client, and skills it can reuse. The second client takes one message, instead of ten."),
+    (1094.0, "n091", "Wi-Fi back on, and we're back to Claude in the cloud."),
+    (1102.0, "n092", "One more thing. Every morning at eight, send me the project status."),
+    (1116.0, "n093", "Now it runs on a schedule. The agency keeps working while the humans sleep."),
+    # ---- Missouri (18:54-19:10); the Spanish clip plays at 19:00.8
+    (1135.2, "n094", "Fun fact. I don't speak Spanish. I'm from Missouri."),
+    (1147.0, "n095", "My voice. In Spanish. Made on this laptop."),
+    # ---- close (19:10-20:25)
+    (1152.0, "n096", "I built all of this in a week, with AI. The agent is open source, and the model fits on a laptop you can buy today."),
+    (1163.0, "n097", "Want the repo? Scan the code on the left. It opens an email to me, and I'll send you the GitHub link."),
+    (1172.5, "n098", "The code on the right is the Reshaping Workflows podcast, on Apple Podcasts."),
+    (1180.0, "n099", "Remember. Every creative call you saw today was made by a human. The agent just did the clicking."),
+    (1189.0, "n100", "Okay. Handing it back to the real me. Let's take your questions."),
+]
