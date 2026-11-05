@@ -57,3 +57,7 @@ offline beat in the video uses gpt-oss 20B on Ollama instead.
   source recordings are not published).
 
 Cabana Cold Brew is a fictional brand.
+
+## License
+MIT (see `LICENSE`). Third-party tools keep their own licenses: adb-mcp (MIT), Hermes Agent, Faster-Whisper,
+Chatterbox (MIT) and the Adobe applications. Cabana Cold Brew is a fictional brand.
